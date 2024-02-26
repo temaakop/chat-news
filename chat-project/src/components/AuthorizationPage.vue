@@ -7,9 +7,6 @@ const userStore = useUserStore()
 
 const router = useRouter()
 
-const emits = defineEmits<{
-  (e: 'modalIsOpen'): void
-}>()
 const userEmail = ref('')
 const userToken = ref('')
 
@@ -25,7 +22,6 @@ const handleClick = () => {
     router.push('/main')
   }
   emailSent.value = !emailSent.value
-  emits('modalIsOpen')
 }
 
 const tokenRequest = async () => {
