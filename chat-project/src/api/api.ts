@@ -60,3 +60,37 @@ export const getNewsForSearch = async (text: string) => {
   console.log(result)
   return result.articles
 }
+
+export const requestOnChangesName = async (token: string, newName: string) => {
+  const bodyRequest = {
+    name: newName
+  }
+  try {
+    const request = await fetch('https://edu.strada.one/api/user', {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(bodyRequest)
+    })
+    const result = await request.json()
+
+    return result
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const tokenRequest = async (email: string) => {
+  const request = await fetch('https://edu.strada.one/api/user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify({
+      email: email
+    })
+  })
+  return request
+}

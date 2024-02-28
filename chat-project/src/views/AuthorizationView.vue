@@ -2,7 +2,7 @@
 import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-
+import { tokenRequest } from '@/api/api'
 const userStore = useUserStore()
 
 const router = useRouter()
@@ -15,27 +15,22 @@ const emailSent = ref(false)
 const handleClick = () => {
   // localStorage.setItem('email', userEmail.value)
   userStore.setEmail(userEmail.value)
-  if (!emailSent.value) tokenRequest()
-  if (emailSent.value) {
-    // localStorage.setItem('token', userToken.value)
-    userStore.setToken(userToken.value)
-    router.push('/main')
-  }
-  emailSent.value = !emailSent.value
+  tokenRequest(userStore.email)
+  router.push('/login')
 }
 
-const tokenRequest = async () => {
-  const request = await fetch('https://edu.strada.one/api/user', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify({
-      email: userEmail.value
-    })
-  })
-  return request
-}
+// const tokenRequest = async () => {
+//   const request = await fetch('https://edu.strada.one/api/user', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json;charset=utf-8'
+//     },
+//     body: JSON.stringify({
+//       email: userEmail.value
+//     })
+//   })
+//   return request
+// }
 </script>
 
 <template>
@@ -47,14 +42,8 @@ const tokenRequest = async () => {
         <input v-model="userEmail" class="email-input" type="email" placeholder="Введите e-mail" />
       </div>
 
-      <div v-if="emailSent" class="input-container">
-        <label> Введите токен:{{ userToken }}</label>
-        <input v-model="userToken" class="token-input" type="text" placeholder="Введите токен" />
-      </div>
       <div class="button-container">
-        <button @click="handleClick" class="login-button">
-          {{ emailSent ? 'Login' : 'Send' }}
-        </button>
+        <button @click="handleClick" class="login-button">Отправить</button>
       </div>
     </div>
   </div>

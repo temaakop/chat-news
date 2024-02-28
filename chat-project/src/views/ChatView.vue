@@ -3,7 +3,7 @@ import type { Message } from '@/types/types'
 import { useWebSocket } from '@/composables/useWebSocket'
 
 import ChatMessage from '@/components/ChatMessage.vue'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { connectionToWebSocket, getChatMessages } from '@/api/api'
 import { useUserStore } from '@/stores/user'
 
@@ -19,9 +19,12 @@ const userStore = useUserStore()
 
 onMounted(async () => {
   messages.value = await getChatMessages(userStore.token)
-  debugger
   connectionToWebSocket(userStore.token)
+  setTimeout(() => {
+    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+  })
 })
+
 const handleScroll = () => {
   if (messagesContainer.value.scrollTop === 0) {
     messagesContainer.value.scrollTop = 1918
@@ -29,13 +32,13 @@ const handleScroll = () => {
   }
 }
 
-watch(messages, () => {
-  //Будет пролистывать вниз при обновленнии messages, исправить []
+// watch(messages, () => {
+//   //Будет пролистывать вниз при обновленнии messages, исправить []
 
-  setTimeout(() => {
-    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
-  })
-})
+// setTimeout(() => {
+//   messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+// })
+// })
 
 watch(message, (newMessage: Message | undefined) => {
   if (newMessage) messages.value = [newMessage, ...messages.value]

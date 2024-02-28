@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { getUserInfo } from '@/api/api'
-import { getNewsForSearch } from '@/api/api'
 import UserInfoModal from '@/components/common/UserInfoModal.vue'
 import PageHeader from '@/components/PageHeader.vue'
 import { useUserStore } from '@/stores/user'
 import { onMounted, ref } from 'vue'
-import NewsView from '@/views/NewsView.vue'
-import ChatView from '@/views/ChatView.vue'
 
 const modalIsOpen = ref(false)
 
@@ -14,10 +11,11 @@ const userStore = useUserStore()
 
 onMounted(async () => {
   const userInfo = await getUserInfo(userStore.token)
+  console.log(userInfo)
   userStore.setUserName(userInfo.name)
 })
+
 const openModal = () => {
-  console.log('work')
   return (modalIsOpen.value = true)
 }
 const closeModal = () => {
@@ -26,7 +24,6 @@ const closeModal = () => {
 </script>
 
 <template>
-  <!-- <RouterView /> -->
   <UserInfoModal @close-modal="closeModal" v-if="modalIsOpen" />
   <PageHeader @open-modal="openModal" />
   <main>
@@ -41,8 +38,6 @@ const closeModal = () => {
       </ul>
     </div>
     <div class="content">
-      <!-- <NewsView /> -->
-
       <RouterView />
     </div>
   </main>
@@ -55,10 +50,27 @@ main {
   padding: 20px;
 }
 
-.content {
+main > div {
   background-color: rgba(108, 23, 141, 0.671);
   border: 1px solid white;
   border-radius: 2px;
   padding: 10px;
+}
+
+.sidebar {
+  height: 10vh;
+}
+.sidebar ul {
+  color: white;
+  font-size: 22px;
+}
+
+a {
+  cursor: pointer;
+  transition: color linear 0.2s;
+}
+
+a:hover {
+  color: rgb(121, 94, 170);
 }
 </style>
