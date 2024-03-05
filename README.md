@@ -1,2 +1,2 @@
-# chatNews
+# chat-news
 chat and news
