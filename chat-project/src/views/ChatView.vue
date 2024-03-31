@@ -6,6 +6,7 @@ import ChatMessage from '@/components/ChatMessage.vue'
 import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { connectionToWebSocket, getChatMessages } from '@/api/api'
 import { useUserStore } from '@/stores/user'
+import ButtonComponent from '@/components/ButtonComponent.vue'
 
 const userRouter = useUserStore()
 
@@ -51,6 +52,7 @@ const viewsMessages = computed(() => {
 function handleClick() {
   sendMessage(messageText.value)
   messageText.value = ''
+  console.log('qw')
 }
 </script>
 
@@ -60,7 +62,8 @@ function handleClick() {
   </div>
   <div class="message-input">
     <input v-model="messageText" type="text" />
-    <button @click="handleClick">Отправить</button>
+    <!-- <button @click="handleClick">Отправить</button> -->
+    <ButtonComponent @click="handleClick" size="small">Отправить </ButtonComponent>
   </div>
 </template>
 

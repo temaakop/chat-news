@@ -23,3 +23,18 @@ export interface NewsArticle {
   publishedAt: string
   content: string
 }
+
+export enum Variant {
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Success = 'success',
+  Danger = 'danger',
+  Warning = 'warning',
+  Info = 'info'
+}
+
+export enum Size {
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large'
+}
