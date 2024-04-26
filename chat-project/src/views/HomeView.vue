@@ -51,16 +51,20 @@ main {
 }
 
 main > div {
-  background-color: rgba(108, 23, 141, 0.671);
-  border: 1px solid white;
+  background-color: #4395f3;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border-radius: 2px;
   padding: 10px;
 }
 
 .sidebar {
-  height: 10vh;
+  max-width: 350px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .sidebar ul {
+  list-style: none;
   color: white;
   font-size: 22px;
 }
@@ -71,6 +75,6 @@ a {
 }
 
 a:hover {
-  color: rgb(121, 94, 170);
+  color: rgb(61, 61, 61);
 }
 </style>

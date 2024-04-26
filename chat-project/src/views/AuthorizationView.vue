@@ -8,33 +8,44 @@ const userStore = useUserStore()
 const router = useRouter()
 
 const userEmail = ref('')
-const userToken = ref('')
-
-const emailSent = ref(false)
 
 const handleClick = () => {
-  // localStorage.setItem('email', userEmail.value)
+  localStorage.setItem('email', userEmail.value)
   userStore.setEmail(userEmail.value)
   tokenRequest(userStore.email)
   router.push('/login')
 }
-
-// const tokenRequest = async () => {
-//   const request = await fetch('https://edu.strada.one/api/user', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json;charset=utf-8'
-//     },
-//     body: JSON.stringify({
-//       email: userEmail.value
-//     })
-//   })
-//   return request
-// }
 </script>
 
 <template>
-  <div class="container">
+  <div class="d-flex h-screen align-center justify-center bg-indigo-lighten-3">
+    <v-card
+      class="pa-6 d-flex align-center flex-column justify-center rounded bg-indigo"
+      :width="500"
+    >
+      <v-card-title class="text-h3 mb-6">CHATNEWS</v-card-title>
+      {{ userEmail }}
+      <v-text-field
+        v-model="userEmail"
+        class="align-self-stretch"
+        label="Введите Email"
+      ></v-text-field>
+      <v-card-actions class="d-flex justify-space-between">
+        <v-btn
+          prepend-icon="mdi-account-circle"
+          rounted="xs"
+          elevation="4"
+          @click="handleClick"
+          class="bg-indigo-lighten-5"
+        >
+          Регистрация
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </div>
+</template>
+
+<!--   <div class="container">
     <div class="authorization-container">
       <h1 class="title">CHATNEWS</h1>
       <div class="input-container">
@@ -46,11 +57,9 @@ const handleClick = () => {
         <button @click="handleClick" class="login-button">Отправить</button>
       </div>
     </div>
-  </div>
-</template>
-
+  </div> -->
 <style scoped>
-.container {
+/* .container {
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -72,6 +81,7 @@ const handleClick = () => {
 }
 
 .input-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -95,5 +105,5 @@ input {
   background-color: rgb(247, 244, 248);
   border: none;
   border-radius: 2px;
-}
+} */
 </style>

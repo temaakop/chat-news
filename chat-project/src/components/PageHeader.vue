@@ -15,8 +15,9 @@ const emits = defineEmits<{
     </div>
     <div class="header__account">
       <p class="username">{{ userStore.userName }}</p>
+
       <div class="header__account-button">
-        <button @click="emits('openModal')" class="account__button"></button>
+        <img @click="emits('openModal')" class="account-avatar" :src="userStore.userAvatarUrl" />
       </div>
     </div>
   </header>
@@ -26,7 +27,7 @@ const emits = defineEmits<{
 .header {
   padding: 10px;
   height: 64px;
-  background-color: rgba(116, 27, 199, 0.911);
+  background-color: #4395f3;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -44,6 +45,12 @@ const emits = defineEmits<{
 .username {
   color: white;
   font-size: 18px;
+}
+
+.account-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 25rem;
 }
 .header__account-button {
   width: 48px;

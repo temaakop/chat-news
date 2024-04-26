@@ -5,6 +5,9 @@ export const useUserStore = defineStore('counter', () => {
   const userName = ref('')
   const email = ref('')
   const token = ref('')
+  const userAvatarUrl = ref(
+    'C:UsersakopoOneDriveРабочий столprojectschat-newschatNewschat-projectsrcassetsaccount-logo.png'
+  )
 
   function setUserName(payload: string) {
     userName.value = payload
@@ -15,6 +18,18 @@ export const useUserStore = defineStore('counter', () => {
   function setToken(payload: string) {
     token.value = payload
   }
+  function setUserAvatarUrl(payload: string) {
+    userAvatarUrl.value = payload
+  }
 
-  return { userName, email, token, setEmail, setToken, setUserName }
+  return {
+    userName,
+    email,
+    token,
+    userAvatarUrl,
+    setEmail,
+    setToken,
+    setUserName,
+    setUserAvatarUrl
+  }
 })

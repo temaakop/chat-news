@@ -3,9 +3,11 @@ import type { Message } from '@/types/types'
 import { useWebSocket } from '@/composables/useWebSocket'
 
 import ChatMessage from '@/components/ChatMessage.vue'
-import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { connectionToWebSocket, getChatMessages } from '@/api/api'
 import { useUserStore } from '@/stores/user'
+import InputComponent from '@/components/InputComponent.vue'
+import ButtonComponent from '@/components/ButtonComponent.vue'
 
 const userRouter = useUserStore()
 
@@ -32,14 +34,6 @@ const handleScroll = () => {
   }
 }
 
-// watch(messages, () => {
-//   //Будет пролистывать вниз при обновленнии messages, исправить []
-
-// setTimeout(() => {
-//   messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
-// })
-// })
-
 watch(message, (newMessage: Message | undefined) => {
   if (newMessage) messages.value = [newMessage, ...messages.value]
 })
@@ -49,6 +43,7 @@ const viewsMessages = computed(() => {
 })
 
 function handleClick() {
+  console.log('message', messageText.value)
   sendMessage(messageText.value)
   messageText.value = ''
 }
@@ -58,10 +53,14 @@ function handleClick() {
   <div @scroll="handleScroll" class="chat-container" ref="messagesContainer">
     <ChatMessage v-for="(message, index) in viewsMessages" :key="index" :message="message" />
   </div>
-  <div class="message-input">
-    <input v-model="messageText" type="text" />
-    <button @click="handleClick">Отправить</button>
-  </div>
+
+  <form @submit.prevent="handleClick" class="message-input">
+    <!-- <input v-model="messageText" type="text" /> -->
+    <InputComponent v-model="messageText" type="text" variant="success"> </InputComponent>
+    <!-- <InputComponent v-model="messageText" type="text"></InputComponent>
+    <InputComponent v-model="messageText" type="text" size="small"></InputComponent> -->
+    <ButtonComponent>Отправить </ButtonComponent>
+  </form>
 </template>
 
 <style scoped>
@@ -78,14 +77,15 @@ function handleClick() {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  gap: 10px;
 }
 
-.message-input input {
+/* .message-input input {
   width: 100%;
 }
 
 .message-input button {
   cursor: pointer;
   margin-left: 15px;
-}
+} */
 </style>

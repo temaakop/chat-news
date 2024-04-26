@@ -23,3 +23,33 @@ export interface NewsArticle {
   publishedAt: string
   content: string
 }
+
+export enum ButtonVariant {
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Success = 'success',
+  Danger = 'danger',
+  Warning = 'warning',
+  Info = 'info'
+}
+
+export enum InputVariant {
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Success = 'success',
+  Danger = 'danger',
+  Warning = 'warning',
+  Info = 'info'
+}
+export enum Size {
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large'
+}
+
+export enum LabelPosition {
+  Top = 'top',
+  Lef = 'left',
+  Right = 'right',
+  Bottom = 'bottom'
+}
