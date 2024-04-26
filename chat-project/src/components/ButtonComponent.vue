@@ -1,25 +1,28 @@
 <script lang="ts" setup>
-import { Size, Variant } from '@/types/types'
-import { defineProps } from 'vue'
+import { Size, ButtonVariant } from '@/types/types'
+import { computed } from 'vue'
 
 const props = defineProps({
   variant: {
     type: String,
-    default: Variant.Primary,
-    validator: (value: string) => Object.values(Variant).includes(value as Variant)
+    default: ButtonVariant.Primary,
+    validator: (value: string) => Object.values(ButtonVariant).includes(value as ButtonVariant)
   },
   size: {
     type: String,
     default: Size.Medium,
     validator: (value: string) => Object.values(Size).includes(value as Size)
+  },
+  rounded: {
+    type: Boolean,
+    default: false
   }
 })
 
-const buttonClasses = ['btn', props.variant, props.size]
+const buttonClasses = computed(() => ['btn', props.variant, props.size])
 </script>
-
 <template>
-  <button :class="buttonClasses" v-bind="$attrs" @click="$emit('click')">
+  <button :class="[buttonClasses, rounded ? 'rounded-btn' : '']" v-bind="$attrs">
     <slot></slot>
   </button>
 </template>
@@ -27,14 +30,24 @@ const buttonClasses = ['btn', props.variant, props.size]
 <style scoped>
 .btn {
   display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
+  max-width: 100px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* padding: 0.5rem 1rem; */
   border: 1px solid transparent;
   border-radius: 0.25rem;
   font-size: 1rem;
   cursor: pointer;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
 
-  transition: background-color 0.3s ease;
+.btn.rounded-btn {
+  font-size: large;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
 .primary {
@@ -69,16 +82,18 @@ const buttonClasses = ['btn', props.variant, props.size]
 
 .btn:hover {
   cursor: pointer;
+  filter: brightness(0.4);
+  transform: scale(1.05);
 }
 
 .small {
-  font-size: 12px;
-  padding: 5px 10px;
+  font-size: 8px;
+  padding: 3px 5px;
 }
 
 .medium {
-  font-size: 14px;
-  padding: 8px 16px;
+  font-size: 12px;
+  padding: 4px 8px;
 }
 
 .large {
