@@ -10,9 +10,14 @@ const modalIsOpen = ref(false)
 const userStore = useUserStore()
 
 onMounted(async () => {
-  const userInfo = await getUserInfo(userStore.token)
-  console.log(userInfo)
-  userStore.setUserName(userInfo.name)
+  const token = localStorage.getItem('token')
+  if (token) {
+    const userInfo = await getUserInfo(token)
+    userStore.setToken(token)
+    userStore.setEmail(userInfo.email)
+    console.log(userInfo)
+    userStore.setUserName(userInfo.name)
+  }
 })
 
 const openModal = () => {
@@ -45,12 +50,12 @@ const closeModal = () => {
 <style scoped>
 main {
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 1fr 7fr;
   gap: 10px;
   padding: 20px;
 }
 
-main > div {
+.content {
   background-color: #4395f3;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border-radius: 2px;
@@ -70,11 +75,17 @@ main > div {
 }
 
 a {
+  padding: 5px;
+  display: block;
+  width: 100px;
+  color: rgb(65, 62, 62);
   cursor: pointer;
-  transition: color linear 0.2s;
+  transition: all linear 0.2s;
+  border-radius: 5px;
 }
 
 a:hover {
-  color: rgb(61, 61, 61);
+  color: rgb(32, 32, 32);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 </style>

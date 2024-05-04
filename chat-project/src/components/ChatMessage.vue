@@ -30,16 +30,18 @@ const checkUsername = () => {
 <style scoped>
 .message {
   padding: 5px;
+  color: black;
+  width: 100%;
   max-width: 450px; /* мало */
-  border: 1px solid black;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
-  background-color: rgb(48, 41, 41);
+  background-color: white;
   display: flex;
   flex-direction: column;
 }
 
 .username {
-  color: aliceblue;
+  color: rgb(75, 76, 77);
 }
 
 .message-date {

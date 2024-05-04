@@ -22,7 +22,7 @@ const searchNews = async () => {
       <!-- <button @click="searchNews" type="submit">Поиск</button> -->
       <button-component @click="searchNews" rounded> <p>></p></button-component>
     </div>
-    <div v-if="!searchText" class="placeholder">Write something in search input</div>
+    <div v-if="!searchText" class="placeholder"></div>
     <NewsCard v-else v-for="(news, index) in newsList" :article="news" :key="index" />
   </div>
 </template>

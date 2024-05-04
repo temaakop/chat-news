@@ -46,7 +46,7 @@ const buttonClasses = computed(() => ['btn', props.variant, props.size])
 .btn.rounded-btn {
   font-size: large;
   width: 40px;
-  height: 40px;
+  height: 35px;
   border-radius: 50%;
 }
 

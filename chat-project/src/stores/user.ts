@@ -4,10 +4,8 @@ import { defineStore } from 'pinia'
 export const useUserStore = defineStore('counter', () => {
   const userName = ref('')
   const email = ref('')
-  const token = ref('')
-  const userAvatarUrl = ref(
-    'C:UsersakopoOneDriveРабочий столprojectschat-newschatNewschat-projectsrcassetsaccount-logo.png'
-  )
+  const token = ref<string>('')
+  const userAvatarUrl = ref()
 
   function setUserName(payload: string) {
     userName.value = payload
