@@ -13,7 +13,7 @@ const userToken = ref('')
 const emailSent = ref(false)
 
 const handleClick = () => {
-  // localStorage.setItem('token', userToken.value)
+  localStorage.setItem('token', userToken.value)
   userStore.setToken(userToken.value)
   router.push('/main')
 }

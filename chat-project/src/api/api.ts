@@ -37,7 +37,7 @@ export const getChatMessages = async (token: string) => {
     console.error(error)
   }
 }
-export const getUserInfo = async (token: string) => {
+export const getUserInfo = async (token: string | null) => {
   try {
     const request = await fetch('https://edu.strada.one/api/user/me', {
       method: 'GET',

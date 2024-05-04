@@ -21,7 +21,7 @@ const newName = ref('')
 const userAvatarURL = ref('')
 const userBirthDay = ref('')
 
-const handleClick = async () => {
+const changeUserName = async () => {
   requestOnChangesName(userStore.token, newName.value)
   const userInfo = await getUserInfo(userStore.token)
   userStore.setUserName(userInfo.name)
@@ -35,7 +35,7 @@ const handleChanges = (e: InputEvent) => {
   }
 }
 
-const handleSubmit = () => {
+const changeUserAvatar = () => {
   userStore.setUserAvatarUrl(userAvatarURL.value)
 }
 
@@ -48,32 +48,30 @@ const updateDate = (date) => {
   <div class="container">
     <div class="container__user-info">
       <div class="user-info__header">
-        <h3>Информация о пользователе:</h3>
+        <h3>Информация о пользователе</h3>
         <button @click="emits('closeModal')">X</button>
       </div>
-      <date-picker @date-change="updateDate"> </date-picker>
-      <div>{{ userBirthDay }}</div>
-      <input type="date" />
+      <!-- <date-picker @date-change="updateDate"> </date-picker>
+      <div>{{ userBirthDay }}</div> -->
+      <div class="user-avatar">
+        <img class="account-avatar" :src="userStore.userAvatarUrl" />
+      </div>
       <div class="user-info">
-        <p>E-mail :</p>
         <p class="text">{{ userStore.email }}</p>
       </div>
       <div class="user-info">
-        <p>Имя :</p>
         <p class="text">{{ userStore.userName }}</p>
       </div>
-      <form class="changes-name">
+      <form class="changes-name" @submit.prevent="changeUserName">
         <input-component v-model="newName" type="text"> Nikckname </input-component>
 
-        <button-component @click="handleClick" class="changes-name__button"
-          >Изменить</button-component
-        >
+        <button-component type="submit" class="changes-name__button">Изменить</button-component>
       </form>
-      <form @submit.prevent="handleSubmit">
+      <form @submit.prevent="changeUserAvatar">
         <input-component @change="handleChanges" type="file"></input-component>
         <button-component>Изменить аватар</button-component>
       </form>
-      <input-component @change="handleChanges" type="date"> </input-component>
+
       <!-- <button @click="router.push('/')" class="exit">Выйти из профиля</button>
       <SelectComponent
         id="userBirthDayForm"
@@ -106,13 +104,13 @@ const updateDate = (date) => {
 
 .container__user-info {
   border: 1px solid white;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 20px;
   gap: 15px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
-  max-width: 680px;
+  max-width: 400px;
   width: 100%;
   background-color: rgb(255, 255, 255);
 }
@@ -127,8 +125,14 @@ const updateDate = (date) => {
 .user-info__header button {
   cursor: pointer;
 }
+
+.account-avatar {
+  align-self: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 25rem;
+}
 .user-info .text {
-  color: aliceblue;
 }
 form {
   width: 100%;

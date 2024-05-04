@@ -8,20 +8,17 @@ import { connectionToWebSocket, getChatMessages } from '@/api/api'
 import { useUserStore } from '@/stores/user'
 import InputComponent from '@/components/InputComponent.vue'
 import ButtonComponent from '@/components/ButtonComponent.vue'
-
-const userRouter = useUserStore()
-
+const userStore = useUserStore()
 const messagesContainer = ref()
 const endOfMessagesViews = ref(20)
 const messages = ref<Message[]>([])
-const { message, sendMessage } = useWebSocket(userRouter.token)
+const { message, sendMessage } = useWebSocket(userStore.token)
 const messageText = ref<string>('')
 
-const userStore = useUserStore()
-
 onMounted(async () => {
-  messages.value = await getChatMessages(userStore.token)
   connectionToWebSocket(userStore.token)
+  messages.value = await getChatMessages(userStore.token)
+
   setTimeout(() => {
     messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
   })
@@ -56,7 +53,7 @@ function handleClick() {
 
   <form @submit.prevent="handleClick" class="message-input">
     <!-- <input v-model="messageText" type="text" /> -->
-    <InputComponent v-model="messageText" type="text" variant="success"> </InputComponent>
+    <InputComponent v-model="messageText" type="text"> </InputComponent>
     <!-- <InputComponent v-model="messageText" type="text"></InputComponent>
     <InputComponent v-model="messageText" type="text" size="small"></InputComponent> -->
     <ButtonComponent>Отправить </ButtonComponent>
@@ -65,7 +62,7 @@ function handleClick() {
 
 <style scoped>
 .chat-container {
-  max-height: 75vh;
+  max-height: 68vh;
   overflow-y: scroll;
   padding: 10px;
   display: flex;

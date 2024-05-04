@@ -56,7 +56,6 @@ const inputClasses = computed(() => ['input', props.size, props.variant])
   position: relative;
 }
 .input {
-  max-width: 300px;
   display: block;
   width: 100%;
   padding: 5px;

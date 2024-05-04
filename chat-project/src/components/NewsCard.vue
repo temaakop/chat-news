@@ -21,31 +21,32 @@ const props = defineProps<{
 <style scoped>
 .news-card {
   margin: 15px 0;
-  background-color: rgb(85, 51, 236);
+  background-color: white;
   border: white solid 2px;
   border-radius: 5px;
   padding: 10px;
+  color: rgb(65, 62, 62);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
 }
 
 .news-title {
   font-size: 20px;
-  color: aliceblue;
+  color: rgb(34, 34, 34);
   font-weight: bold;
 }
 
 .author b {
-  color: aliceblue;
+  color: rgb(61, 60, 60);
 }
 
 .news__description {
-  color: aliceblue;
   font-size: 18px;
 }
 
 .news__original-link {
   cursor: pointer;
 
-  color: antiquewhite;
+  color: rgb(65, 62, 62);
 }
 .news-image {
   width: 100%;
