@@ -30,6 +30,7 @@ const closeModal = () => {
 
 <template>
   <UserInfoModal @close-modal="closeModal" v-if="modalIsOpen" />
+
   <PageHeader @open-modal="openModal" />
   <main>
     <div class="sidebar">
@@ -49,6 +50,9 @@ const closeModal = () => {
 </template>
 <style scoped>
 main {
+  margin: 0 auto;
+  max-width: 1000px;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 7fr;
   gap: 10px;
