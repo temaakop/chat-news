@@ -1,5 +1,16 @@
 <script setup lang="ts">
+import { connectionToWebSocket } from '@/api/api';
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router'
+
+onMounted(() => {
+  const userEmail = localStorage.getItem('email');
+  const userToken = localStorage.getItem('token');
+  if (userEmail && userToken) {
+    connectionToWebSocket(userToken);
+    router.push('/main')
+  }
+})
 
 const router = useRouter()
 </script>
@@ -22,14 +33,12 @@ const router = useRouter()
           Регистрация
         </v-btn>
         <v-btn
+        prepend-icon="di-login"
           rounted="xs"
           elevation="4"
           @click="router.push('/login')"
           class="bg-indigo-lighten-5"
         >
-          <template v-slot:prepend>
-            <v-icon icon="mdi-login"></v-icon>
-          </template>
           Войти
         </v-btn>
       </v-card-actions>

@@ -7,10 +7,7 @@ const userStore = useUserStore()
 
 const router = useRouter()
 
-const userEmail = ref('')
 const userToken = ref('')
-
-const emailSent = ref(false)
 
 const handleClick = () => {
   localStorage.setItem('token', userToken.value)
@@ -20,7 +17,7 @@ const handleClick = () => {
 </script>
 
 <template>
-  <div class="container">
+  <!-- <div class="container">
     <div class="authorization-container">
       <h1 class="title">CHATNEWS</h1>
 
@@ -32,11 +29,40 @@ const handleClick = () => {
         <button @click="handleClick" class="login-button">Login</button>
       </div>
     </div>
+  </div> -->
+  <div class="d-flex h-screen align-center justify-center bg-indigo-lighten-3">
+    <v-card
+      class="pa-6 d-flex align-center flex-column justify-center rounded bg-indigo"
+      :width="500"
+    >
+      <v-card-title class="text-h3 mb-6">CHATNEWS</v-card-title>
+      <v-card-text>Введите токен:</v-card-text>
+
+      <v-text-field
+        v-model="userToken"
+        class="align-self-stretch"
+        label="Введите токен"
+      ></v-text-field>
+      <v-card-actions class="d-flex justify-space-between w-75">
+        <v-btn rounted="xs" elevation="4" @click="router.push('/')" class="bg-indigo-lighten-5">
+          Назад
+        </v-btn>
+        <v-btn
+          prepend-icon="mdi-login"
+          rounted="xs"
+          elevation="4"
+          @click="handleClick"
+          class="bg-indigo-lighten-5"
+        >
+          Войти
+        </v-btn>
+      </v-card-actions>
+    </v-card>
   </div>
 </template>
 
 <style scoped>
-.container {
+/* .container {
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -81,5 +107,5 @@ input {
   background-color: rgb(247, 244, 248);
   border: none;
   border-radius: 2px;
-}
+} */
 </style>
