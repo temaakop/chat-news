@@ -35,6 +35,15 @@ const handleClick = () => {
           prepend-icon="mdi-account-circle"
           rounted="xs"
           elevation="4"
+          @click="router.push('/')"
+          class="bg-indigo-lighten-5"
+        >
+          Назад
+        </v-btn>
+        <v-btn
+          prepend-icon="mdi-account-circle"
+          rounted="xs"
+          elevation="4"
           @click="handleClick"
           class="bg-indigo-lighten-5"
         >

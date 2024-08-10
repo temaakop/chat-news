@@ -9,6 +9,7 @@ const modalIsOpen = ref(false)
 
 const userStore = useUserStore()
 
+//TODO: убрать установку емейла и токена, каждыый раз.
 onMounted(async () => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -30,30 +31,32 @@ const closeModal = () => {
 
 <template>
   <UserInfoModal @close-modal="closeModal" v-if="modalIsOpen" />
-
   <PageHeader @open-modal="openModal" />
   <main>
-    <div class="sidebar">
-      <ul>
-        <li>
-          <a @click="$router.push({ path: '/main/news', replace: true })">News</a>
-        </li>
-        <li>
-          <a @click="$router.push({ path: '/main/chat', replace: true })">Message</a>
-        </li>
-      </ul>
-    </div>
-    <div class="content">
-      <RouterView />
+    <div class="container">
+      <div class="sidebar">
+        <ul>
+          <li>
+            <a @click="$router.push({ path: '/main/news', replace: true })">News</a>
+          </li>
+          <li>
+            <a @click="$router.push({ path: '/main/chat', replace: true })">Message</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <RouterView />
+      </div>
     </div>
   </main>
 </template>
 <style scoped>
-main {
+.container {
+  display: grid;
   margin: 0 auto;
   max-width: 1000px;
   width: 100%;
-  display: grid;
+
   grid-template-columns: 1fr 7fr;
   gap: 10px;
   padding: 20px;
